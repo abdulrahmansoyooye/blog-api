@@ -22,6 +22,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post("/", upload.single("image"), async (req, res) => {
+
+
+  res.setHeader("Access-Control-Allow-Origin", "*")
+res.setHeader("Access-Control-Allow-Credentials", "true");
+res.setHeader("Access-Control-Max-Age", "1800");
+res.setHeader("Access-Control-Allow-Headers", "content-type");
+
+
   const token = await req.headers.authorization;
   const decodedToken = jwt.verify(token, "secret");
   const { title, summary, content } = req.body;

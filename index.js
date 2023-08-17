@@ -30,7 +30,7 @@ const app = express();
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['https://blog-app-client-three.vercel.app/','http://localhost:3000/create'],
   allowedHeaders: ['Authorization', 'Content-Type'],
 }));
 app.use(cookieParser());
