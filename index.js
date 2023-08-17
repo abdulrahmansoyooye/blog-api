@@ -29,9 +29,17 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 app.use(cors({
-  origin: ['https://blog-app-client-three.vercel.app/','http://localhost:3000/create'],
-  allowedHeaders: ['Authorization', 'Content-Type'],
+  origin: 'http://localhost:3000', // Specify the allowed origin(s)
+  credentials: true, // Allow credentials (cookies, headers)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 }));
 app.use(cookieParser());
 // Routes
