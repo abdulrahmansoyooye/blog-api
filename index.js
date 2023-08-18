@@ -32,9 +32,6 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use((req, res, next) => {
 
 res.setHeader("Access-Control-Allow-Origin", "*")
-res.setHeader("Access-Control-Allow-Credentials", "true");
-res.setHeader("Access-Control-Max-Age", "1800");
-res.setHeader("Access-Control-Allow-Headers", "content-type");
   next();
 });
 app.use(cors({
