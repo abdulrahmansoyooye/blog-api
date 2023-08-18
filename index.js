@@ -30,14 +30,15 @@ const app = express();
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*")
+
+res.setHeader("Access-Control-Allow-Origin", "*")
 res.setHeader("Access-Control-Allow-Credentials", "true");
 res.setHeader("Access-Control-Max-Age", "1800");
 res.setHeader("Access-Control-Allow-Headers", "content-type");
   next();
 });
 app.use(cors({
-  origin: ['https://blog-app-client-three.vercel.app/','https://blog-app-client-three.vercel.app/create'], // Specify the allowed origin(s)
+  origin:  '*', // Specify the allowed origin(s)
   credentials: true, // Allow credentials (cookies, headers)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
