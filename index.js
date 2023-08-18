@@ -32,13 +32,16 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use((req, res, next) => {
 
 res.setHeader("Access-Control-Allow-Origin", "*")
+res.setHeader("Access-Control-Allow-Credentials", "true");
+res.setHeader("Access-Control-Max-Age", "1800");
+res.setHeader("Access-Control-Allow-Headers", "content-type");
   next();
 });
 app.use(cors({
   origin:  '*', // Specify the allowed origin(s)
   credentials: true, // Allow credentials (cookies, headers)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+ 
 }));
 app.use(cookieParser());
 // Routes
