@@ -30,12 +30,16 @@ router.post("/", upload.single("image"), async (req, res) => {
   const token = await req.headers.authorization;
   const decodedToken = jwt.verify(token, "secret");
   const { title, summary, content } = req.body;
-
+if(!req.file){
+  res.json({"message":"No file found"})
+}
   const { originalname, path } = req.file;
   const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
   const newPath = path + "." + ext;
   fs.renameSync(path, newPath);
+
+ 
 
   const savedPost = await PostModel.create({
     title,
