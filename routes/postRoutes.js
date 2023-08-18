@@ -28,13 +28,11 @@ router.post("/", upload.single("image"), async (req, res) => {
   res.setHeader("Access-Control-Max-Age", "1800");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
 
-  
+
   const token =  req.headers.authorization;
   const decodedToken = jwt.verify(token, "secret");
   const { title, summary, content } = req.body;
-if(!req.file){
-  res.json({"message":"No file found"})
-}
+
   const { originalname, path } = req.file;
   const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
