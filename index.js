@@ -37,7 +37,7 @@ res.setHeader("Access-Control-Allow-Headers", "content-type");
   next();
 });
 app.use(cors({
-  origin: 'http://localhost:3000', // Specify the allowed origin(s)
+  origin: ['https://blog-app-client-three.vercel.app/','https://blog-app-client-three.vercel.app/create'], // Specify the allowed origin(s)
   credentials: true, // Allow credentials (cookies, headers)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
