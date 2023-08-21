@@ -33,12 +33,14 @@ app.use(function (req, res, next) {
   //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
 app.use(cors({
   origin:  '*', // Specify the allowed origin(s)
   credentials: true, // Allow credentials (cookies, headers)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+  
  
 }));
 app.use(cookieParser());
