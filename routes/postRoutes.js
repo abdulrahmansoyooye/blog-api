@@ -22,10 +22,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post("/", upload.single("image"), async (req, res) => {
-
- console.log(req.body)
-
-  const token =  req.headers.authorization;
+  const token = req.headers.authorization;
   const decodedToken = jwt.verify(token, "secret");
   const { title, summary, content } = req.body;
 
@@ -34,8 +31,6 @@ router.post("/", upload.single("image"), async (req, res) => {
   const ext = parts[parts.length - 1];
   const newPath = path + "." + ext;
   fs.renameSync(path, newPath);
-
- 
 
   const savedPost = await PostModel.create({
     title,
@@ -58,6 +53,22 @@ router.get("/:id", async (req, res) => {
   const post = await PostModel.findById(id);
 
   res.send(post);
+});
+
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, summary, content } = req.body;
+
+  try {
+    const updatedPost = await PostModel.findByIdAndUpdate(
+      { _id: id },
+      { $set: { title, content, summary } },
+      { new: true }
+    );
+    res.send(updatedPost);
+  } catch (err) {
+    console.log(err);
+  }
 });
 module.exports = router;
 // export default router;
