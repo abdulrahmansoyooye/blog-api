@@ -25,7 +25,7 @@ const connectToDatabase = require("./connect.js");
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
 const app = express();
-// Middlewares 
+// Middlewares
 // Middlewares
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -33,16 +33,18 @@ app.use(function (req, res, next) {
   //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-app.use(cors({
-  origin:  '*', // Specify the allowed origin(s)
-  credentials: true, // Allow credentials (cookies, headers)
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
-  
- 
-}));
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+app.use(
+  cors({
+    origin: "*", // Specify the allowed origin(s)
+    credentials: true, // Allow credentials (cookies, headers)
+  })
+);
 app.use(cookieParser());
 // Routes
 app.use("/", userRoutes);
@@ -54,4 +56,4 @@ connectToDatabase();
 app.listen(3001 || process.env.PORT, () => {
   console.log("SERVER IS WORKING");
 });
-module.exports = app
+module.exports = app;

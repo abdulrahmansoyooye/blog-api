@@ -59,16 +59,16 @@ router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { title, summary, content } = req.body;
   console.log(title);
-  // try {
-  //   const updatedPost = await PostModel.findByIdAndUpdate(
-  //     { _id: id },
-  //     { $set: { title, content, summary } },
-  //     { new: true }
-  //   );
-  //   res.send(updatedPost);
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  try {
+    const updatedPost = await PostModel.findByIdAndUpdate(
+      { _id: id },
+      { $set: { title, content, summary } },
+      { new: true }
+    );
+    res.send(updatedPost);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.delete("/delete/:id", async (req, res) => {
